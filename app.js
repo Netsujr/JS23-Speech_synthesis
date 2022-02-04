@@ -6,7 +6,6 @@ const speakButton = document.querySelector('#speak');
 const stopButton = document.querySelector('#stop');
 
 msg.text = document.querySelector('[name="text"]').value;
-speechSynthesis.addEventListener('voiceschanged', populateVoices);
 
 // create the voices array
 function populateVoices() {
@@ -14,5 +13,10 @@ function populateVoices() {
   voicesDropdown.innerHTML = voices
   .map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
   .join('');
-
 }
+
+// create change voice function
+
+
+speechSynthesis.addEventListener('voiceschanged', populateVoices);
+voicesDropdown.addEventListener('change', setVoice);
