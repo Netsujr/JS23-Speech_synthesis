@@ -11,11 +11,24 @@ msg.text = document.querySelector('[name="text"]').value;
 function populateVoices() {
   voices = this.getVoices();
   voicesDropdown.innerHTML = voices
-  .map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
-  .join('');
+    .map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})</option>`)
+    .join('');
 }
 
-// create change voice function
+// create setVoice function
+function setVoice() {
+  msg.voice = voices.find(voice => voice.name === this.value);
+  console.log(msg.voice);
+  toggle();
+}
+
+function toggle(startOver = true) {
+  speechSynthesis.cancel();
+  if (startOver) {
+    speechSynthesis.speak(msg);
+  }
+}
+
 
 
 speechSynthesis.addEventListener('voiceschanged', populateVoices);
